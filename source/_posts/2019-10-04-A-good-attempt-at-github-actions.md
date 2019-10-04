@@ -16,5 +16,9 @@ categories:
 
 通过push内容到gh-pages分支触发更新master。  
 
+### 更新theme
+
+在更新主题的时候，注意主题的提交缺失。
+
 ### 参考
 [HONYE'S BLOG](https://honye.github.io/posts/eaaf4b45.html)
