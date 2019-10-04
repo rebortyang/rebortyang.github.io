@@ -1,0 +1,50 @@
+name: hexo deployer
+
+on:
+  push:
+    branches: 
+      - hexo-g
+
+jobs:
+  build:
+    name: build and publish
+    runs_on: ubuntu-latest
+
+    steps:
+      - name: checkout the branch
+      - uses: actions/checkout@v1
+
+      - name: setup node
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 10.x
+
+      - name: setup hexo env
+        run: |
+          npm install hexo-cli -g
+          npm install
+
+      - name: generate public file
+        run: |
+          hexo clean
+          hexo g
+          ls
+      
+      - name: deploy
+        env:
+          GH_REF: github.com/rebortyang/rebortyang.github.io.git
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+        run:
+          git config --global user.name "rebortyang"
+          git config --global user.email "353281855@qq.com"
+          git clone https://${GH_REF} .deploy_git
+          cd .deploy_git
+          git checkout master
+          cd ../
+          mv .deploy_git/.git/ ./public/
+          cd ./public/
+          git add .
+          git commit -m "CI built at `date +"%Y-%m-%d %H:%M:%S"`"
+          git push --force --quiet "https://${GH_TOKEN}@${GH_REF}" master:master
+
+
