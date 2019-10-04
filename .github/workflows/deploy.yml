@@ -8,7 +8,7 @@ on:
 jobs:
   build:
     name: build and publish
-    runs_on: ubuntu-latest
+    runs-on: ubuntu-latest
 
     steps:
       - name: checkout the branch
