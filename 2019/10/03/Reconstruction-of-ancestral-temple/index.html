@@ -14,7 +14,7 @@
 <meta property="og:site_name" content="YANGJIEBIN&#39;S BLOG">
 <meta property="og:description" content="祠堂重建">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-10-06T08:25:53.172Z">
+<meta property="og:updated_time" content="2019-10-06T10:20:02.282Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="祠堂重建">
 <meta name="twitter:description" content="祠堂重建">
@@ -166,17 +166,33 @@
 
     <script>
         var gitalk = new Gitalk({
-            clientID: '{{ theme.gitalk.gitalk_clientID }}',
-            clientSecret: '{{ theme.gitalk.gitalk_Secret }}',
-            repo: '{{ theme.gitalk.gitalk_repo }}',
-            owner: '{{ theme.gitalk.gitalk_owner }}',
-            admin: '{{ theme.gitalk.gitalk_admin }}',
-            distractionFreeMode: '{{ theme.gitalk.distractionFreeMode }}'  // Facebook-like distraction free mode
+            clientID: 'e29ffe92f1aff2e5629e',
+            clientSecret: 'c5f9c0183106eacb1266afadc93dff10cd13271c',
+            repo: 'rebortyang.github.io',
+            owner: 'rebortyang',
+            admin: ['rebortyang'],
+            id: location.pathname,
+            distractionFreeMode: true  // Facebook-like distraction free mode
         })
     
         gitalk.render('gitalk-container')
     </script>
 
+<!-- 
+    <script>
+        var gitalk = new Gitalk({
+            clientID: '{{ theme.gitalk.gitalk_clientID }}',
+            clientSecret: '{{ theme.gitalk.gitalk_Secret }}',
+            repo: '{{ theme.gitalk.gitalk_repo }}',
+            owner: '{{ theme.gitalk.gitalk_owner }}',
+            admin: '{{ theme.gitalk.gitalk_admin }}',
+            id: location.pathname,
+            distractionFreeMode: '{{ theme.gitalk.distractionFreeMode }}'  // Facebook-like distraction free mode
+        })
+    
+        gitalk.render('gitalk-container')
+    </script>
+ -->
 
 
 
