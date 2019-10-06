@@ -15,7 +15,7 @@
 <meta property="og:description" content="壮阔七十载，奋进新时代。">
 <meta property="og:locale" content="en">
 <meta property="og:image" content="https://rebortyang.github.io/2019/10/01/70th-anniversary-of-new-China/2019guoqingFull.jpg">
-<meta property="og:updated_time" content="2019-10-06T04:22:37.436Z">
+<meta property="og:updated_time" content="2019-10-06T08:25:53.172Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="庆祝70周年">
 <meta name="twitter:description" content="壮阔七十载，奋进新时代。">
@@ -81,6 +81,8 @@
         
         <li><a class="icon" href="/2019/10/03/Github-Actions-test/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
         
+        
+        <li><a class="icon" href="/2019/09/30/hello-world/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
         
         <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
         <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
@@ -157,6 +159,26 @@
 <h2 id="明天会更好！"><a href="#明天会更好！" class="headerlink" title="明天会更好！"></a>明天会更好！</h2><img src="/2019/10/01/70th-anniversary-of-new-China/2019guoqingFull.jpg">
   </div>
 </article>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+<script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+
+<div id="gitalk-container"></div>
+
+
+    <script>
+        var gitalk = new Gitalk({
+            clientID: '{{ theme.gitalk.gitalk_clientID }}',
+            clientSecret: '{{ theme.gitalk.gitalk_Secret }}',
+            repo: '{{ theme.gitalk.gitalk_repo }}',
+            owner: '{{ theme.gitalk.gitalk_owner }}',
+            admin: '{{ theme.gitalk.gitalk_admin }}',
+            distractionFreeMode: '{{ theme.gitalk.distractionFreeMode }}'  // Facebook-like distraction free mode
+        })
+    
+        gitalk.render('gitalk-container')
+    </script>
+
+
 
 
 

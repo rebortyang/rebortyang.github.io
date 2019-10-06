@@ -14,7 +14,7 @@
 <meta property="og:site_name" content="YANGJIEBIN&#39;S BLOG">
 <meta property="og:description" content="农历 二0一九年 九月 初五日 小 (阴历)">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-10-06T04:22:37.440Z">
+<meta property="og:updated_time" content="2019-10-06T08:25:53.172Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="诸事不顺">
 <meta name="twitter:description" content="农历 二0一九年 九月 初五日 小 (阴历)">
@@ -158,6 +158,26 @@
 
   </div>
 </article>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+<script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+
+<div id="gitalk-container"></div>
+
+
+    <script>
+        var gitalk = new Gitalk({
+            clientID: '{{ theme.gitalk.gitalk_clientID }}',
+            clientSecret: '{{ theme.gitalk.gitalk_Secret }}',
+            repo: '{{ theme.gitalk.gitalk_repo }}',
+            owner: '{{ theme.gitalk.gitalk_owner }}',
+            admin: '{{ theme.gitalk.gitalk_admin }}',
+            distractionFreeMode: '{{ theme.gitalk.distractionFreeMode }}'  // Facebook-like distraction free mode
+        })
+    
+        gitalk.render('gitalk-container')
+    </script>
+
+
 
 
 
