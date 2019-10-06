@@ -2,10 +2,10 @@
 title: Github Actions 初体验
 date: 2019-10-03 13:27:28
 tags:
-    - 部落格
+    - GitHub
 categories:
     - 学习
-    - github
+    - GitHub
 ---
 
 尝试运用GitHub actions部署GitHub pages。
