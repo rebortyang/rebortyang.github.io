@@ -138,8 +138,8 @@ gitalk:
   gitalk_clientID: 'e29ffe92f1aff2e5629e'
   gitalk_Secret: 'c5f9c0183106eacb1266afadc93dff10cd13271c'
   gitalk_repo: 'rebortyang.github.io'
-  gitalk_owner: 'yang353281855'
-  gitalk_admin: 'yang353281855'
+  gitalk_owner: 'rebortyang'
+  gitalk_admin: ['rebortyang']
   distractionFreeMode: true
 
 # Fill in your Google Analytics tracking ID to enable Google Analytics.
