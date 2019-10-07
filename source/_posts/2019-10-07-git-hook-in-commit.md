@@ -15,4 +15,4 @@ categories:
 
 ### 参考
 [Git - 查看提交历史](https://www.git-scm.com/book/zh/v2/Git-基础-查看提交历史)  
-[Linux read 命令](https://www.runoob.com/linux/linux-comm-read.html)  
+[Shell 字符串](https://www.runoob.com/linux/linux-shell-variable.html)  
