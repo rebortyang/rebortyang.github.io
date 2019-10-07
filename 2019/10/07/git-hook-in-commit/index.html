@@ -6,18 +6,18 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="HandheldFriendly" content="True">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <meta name="description" content="一次成功的使用GitHub actions来部署GitHub pages。">
-<meta name="keywords" content="GitHub,CICD">
+    <meta name="description" content="思路 在执行commit命令后，提取log 寻找关键词 触发推送  参考Git - 查看提交历史Shell 字符串">
+<meta name="keywords" content="GitHub">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Github Actions的一次良好尝试">
-<meta property="og:url" content="https://rebortyang.github.io/2019/10/04/A-good-attempt-at-github-actions/index.html">
+<meta property="og:title" content="Git钩子的一次尝试使用">
+<meta property="og:url" content="https://rebortyang.github.io/2019/10/07/git-hook-in-commit/index.html">
 <meta property="og:site_name" content="YANGJIEBIN&#39;S BLOG">
-<meta property="og:description" content="一次成功的使用GitHub actions来部署GitHub pages。">
+<meta property="og:description" content="思路 在执行commit命令后，提取log 寻找关键词 触发推送  参考Git - 查看提交历史Shell 字符串">
 <meta property="og:locale" content="en">
 <meta property="og:updated_time" content="2019-10-07T14:14:48.348Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Github Actions的一次良好尝试">
-<meta name="twitter:description" content="一次成功的使用GitHub actions来部署GitHub pages。">
+<meta name="twitter:title" content="Git钩子的一次尝试使用">
+<meta name="twitter:description" content="思路 在执行commit命令后，提取log 寻找关键词 触发推送  参考Git - 查看提交历史Shell 字符串">
     
     
         
@@ -37,7 +37,7 @@
         
     
     <!-- title -->
-    <title>Github Actions的一次良好尝试</title>
+    <title>Git钩子的一次尝试使用</title>
     <!-- styles -->
     <link rel="stylesheet" href="/css/style.css">
     <!-- persian styles -->
@@ -77,10 +77,8 @@
     <span id="actions">
       <ul>
         
-        <li><a class="icon" href="/2019/10/06/defind-your-404/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
         
-        
-        <li><a class="icon" href="/2019/10/03/Reconstruction-of-ancestral-temple/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        <li><a class="icon" href="/2019/10/06/defind-your-404/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
         
         <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
         <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
@@ -93,21 +91,21 @@
     <br/>
     <div id="share" style="display: none">
       <ul>
-  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://rebortyang.github.io/2019/10/04/A-good-attempt-at-github-actions/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://twitter.com/share?url=https://rebortyang.github.io/2019/10/04/A-good-attempt-at-github-actions/&text=Github Actions的一次良好尝试"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://rebortyang.github.io/2019/10/04/A-good-attempt-at-github-actions/&title=Github Actions的一次良好尝试"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://rebortyang.github.io/2019/10/04/A-good-attempt-at-github-actions/&is_video=false&description=Github Actions的一次良好尝试"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=Github Actions的一次良好尝试&body=Check out this article: https://rebortyang.github.io/2019/10/04/A-good-attempt-at-github-actions/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://getpocket.com/save?url=https://rebortyang.github.io/2019/10/04/A-good-attempt-at-github-actions/&title=Github Actions的一次良好尝试"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://reddit.com/submit?url=https://rebortyang.github.io/2019/10/04/A-good-attempt-at-github-actions/&title=Github Actions的一次良好尝试"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://rebortyang.github.io/2019/10/04/A-good-attempt-at-github-actions/&title=Github Actions的一次良好尝试"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://digg.com/submit?url=https://rebortyang.github.io/2019/10/04/A-good-attempt-at-github-actions/&title=Github Actions的一次良好尝试"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://rebortyang.github.io/2019/10/04/A-good-attempt-at-github-actions/&name=Github Actions的一次良好尝试&description=&lt;p&gt;一次成功的使用GitHub actions来部署GitHub pages。&lt;/p&gt;"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://rebortyang.github.io/2019/10/07/git-hook-in-commit/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://rebortyang.github.io/2019/10/07/git-hook-in-commit/&text=Git钩子的一次尝试使用"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://rebortyang.github.io/2019/10/07/git-hook-in-commit/&title=Git钩子的一次尝试使用"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://rebortyang.github.io/2019/10/07/git-hook-in-commit/&is_video=false&description=Git钩子的一次尝试使用"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Git钩子的一次尝试使用&body=Check out this article: https://rebortyang.github.io/2019/10/07/git-hook-in-commit/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://rebortyang.github.io/2019/10/07/git-hook-in-commit/&title=Git钩子的一次尝试使用"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://rebortyang.github.io/2019/10/07/git-hook-in-commit/&title=Git钩子的一次尝试使用"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://rebortyang.github.io/2019/10/07/git-hook-in-commit/&title=Git钩子的一次尝试使用"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://rebortyang.github.io/2019/10/07/git-hook-in-commit/&title=Git钩子的一次尝试使用"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://rebortyang.github.io/2019/10/07/git-hook-in-commit/&name=Git钩子的一次尝试使用&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
 </ul>
 
     </div>
     <div id="toc">
-      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#actions内容"><span class="toc-number">1.</span> <span class="toc-text">actions内容</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#更新theme"><span class="toc-number">2.</span> <span class="toc-text">更新theme</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#参考"><span class="toc-number">3.</span> <span class="toc-text">参考</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#思路"><span class="toc-number">1.</span> <span class="toc-text">思路</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#参考"><span class="toc-number">2.</span> <span class="toc-text">参考</span></a></li></ol>
     </div>
   </span>
 </div>
@@ -119,7 +117,7 @@
   <header>
     
     <h1 class="posttitle" itemprop="name headline">
-        Github Actions的一次良好尝试
+        Git钩子的一次尝试使用
     </h1>
 
 
@@ -131,7 +129,7 @@
       
     <div class="postdate">
       
-        <time datetime="2019-10-04T03:35:58.000Z" itemprop="datePublished">2019-10-04</time>
+        <time datetime="2019-10-07T13:31:59.000Z" itemprop="datePublished">2019-10-07</time>
         
       
     </div>
@@ -147,7 +145,7 @@
       
     <div class="article-tag">
         <i class="fas fa-tag"></i>
-        <a class="tag-link" href="/tags/CICD/">CICD</a>, <a class="tag-link" href="/tags/GitHub/">GitHub</a>
+        <a class="tag-link" href="/tags/GitHub/">GitHub</a>
     </div>
 
 
@@ -156,12 +154,12 @@
   
 
   <div class="content" itemprop="articleBody">
-    <p>一次成功的使用GitHub actions来部署GitHub pages。</p>
-<a id="more"></a>
-
-<h3 id="actions内容"><a href="#actions内容" class="headerlink" title="actions内容"></a>actions内容</h3><p>通过push内容到gh-pages分支触发更新master。  </p>
-<h3 id="更新theme"><a href="#更新theme" class="headerlink" title="更新theme"></a>更新theme</h3><p>在更新主题的时候，注意主题的提交缺失。</p>
-<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><p><a href="https://honye.github.io/posts/eaaf4b45.html" target="_blank" rel="noopener">HONYE’S BLOG</a></p>
+    <h3 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h3><ol>
+<li>在执行commit命令后，提取log</li>
+<li>寻找关键词</li>
+<li>触发推送</li>
+</ol>
+<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><p><a href="https://www.git-scm.com/book/zh/v2/Git-基础-查看提交历史" target="_blank" rel="noopener">Git - 查看提交历史</a><br><a href="https://www.runoob.com/linux/linux-shell-variable.html" target="_blank" rel="noopener">Shell 字符串</a>  </p>
 
   </div>
 </article>
@@ -227,21 +225,21 @@
     </div>
 
     <div id="toc-footer" style="display: none">
-      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#actions内容"><span class="toc-number">1.</span> <span class="toc-text">actions内容</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#更新theme"><span class="toc-number">2.</span> <span class="toc-text">更新theme</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#参考"><span class="toc-number">3.</span> <span class="toc-text">参考</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#思路"><span class="toc-number">1.</span> <span class="toc-text">思路</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#参考"><span class="toc-number">2.</span> <span class="toc-text">参考</span></a></li></ol>
     </div>
 
     <div id="share-footer" style="display: none">
       <ul>
-  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://rebortyang.github.io/2019/10/04/A-good-attempt-at-github-actions/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://twitter.com/share?url=https://rebortyang.github.io/2019/10/04/A-good-attempt-at-github-actions/&text=Github Actions的一次良好尝试"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://rebortyang.github.io/2019/10/04/A-good-attempt-at-github-actions/&title=Github Actions的一次良好尝试"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://rebortyang.github.io/2019/10/04/A-good-attempt-at-github-actions/&is_video=false&description=Github Actions的一次良好尝试"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=Github Actions的一次良好尝试&body=Check out this article: https://rebortyang.github.io/2019/10/04/A-good-attempt-at-github-actions/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://getpocket.com/save?url=https://rebortyang.github.io/2019/10/04/A-good-attempt-at-github-actions/&title=Github Actions的一次良好尝试"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://reddit.com/submit?url=https://rebortyang.github.io/2019/10/04/A-good-attempt-at-github-actions/&title=Github Actions的一次良好尝试"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://rebortyang.github.io/2019/10/04/A-good-attempt-at-github-actions/&title=Github Actions的一次良好尝试"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://digg.com/submit?url=https://rebortyang.github.io/2019/10/04/A-good-attempt-at-github-actions/&title=Github Actions的一次良好尝试"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://rebortyang.github.io/2019/10/04/A-good-attempt-at-github-actions/&name=Github Actions的一次良好尝试&description=&lt;p&gt;一次成功的使用GitHub actions来部署GitHub pages。&lt;/p&gt;"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://rebortyang.github.io/2019/10/07/git-hook-in-commit/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://rebortyang.github.io/2019/10/07/git-hook-in-commit/&text=Git钩子的一次尝试使用"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://rebortyang.github.io/2019/10/07/git-hook-in-commit/&title=Git钩子的一次尝试使用"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://rebortyang.github.io/2019/10/07/git-hook-in-commit/&is_video=false&description=Git钩子的一次尝试使用"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Git钩子的一次尝试使用&body=Check out this article: https://rebortyang.github.io/2019/10/07/git-hook-in-commit/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://rebortyang.github.io/2019/10/07/git-hook-in-commit/&title=Git钩子的一次尝试使用"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://rebortyang.github.io/2019/10/07/git-hook-in-commit/&title=Git钩子的一次尝试使用"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://rebortyang.github.io/2019/10/07/git-hook-in-commit/&title=Git钩子的一次尝试使用"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://rebortyang.github.io/2019/10/07/git-hook-in-commit/&title=Git钩子的一次尝试使用"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://rebortyang.github.io/2019/10/07/git-hook-in-commit/&name=Git钩子的一次尝试使用&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
 </ul>
 
     </div>
