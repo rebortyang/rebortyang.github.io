@@ -6,18 +6,18 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="HandheldFriendly" content="True">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <meta name="description" content="思路 在执行commit命令后，提取log 寻找关键词 触发推送  参考Git - 查看提交历史Shell 字符串">
+    <meta name="description" content="思路 在执行commit命令后，提取log 寻找关键词 触发推送  具体流程 配置远程仓库  origin   使用ssh免输入方式进行推送 编写hook脚本post-commit  1234567891011121314151617181920212223############################# 特定词触发push gh-pages# Author: #############">
 <meta name="keywords" content="GitHub">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Git钩子的一次尝试使用">
 <meta property="og:url" content="https://rebortyang.github.io/2019/10/07/git-hook-in-commit/index.html">
 <meta property="og:site_name" content="YANGJIEBIN&#39;S BLOG">
-<meta property="og:description" content="思路 在执行commit命令后，提取log 寻找关键词 触发推送  参考Git - 查看提交历史Shell 字符串">
+<meta property="og:description" content="思路 在执行commit命令后，提取log 寻找关键词 触发推送  具体流程 配置远程仓库  origin   使用ssh免输入方式进行推送 编写hook脚本post-commit  1234567891011121314151617181920212223############################# 特定词触发push gh-pages# Author: #############">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-10-07T14:14:48.348Z">
+<meta property="og:updated_time" content="2019-10-10T14:23:06.408Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Git钩子的一次尝试使用">
-<meta name="twitter:description" content="思路 在执行commit命令后，提取log 寻找关键词 触发推送  参考Git - 查看提交历史Shell 字符串">
+<meta name="twitter:description" content="思路 在执行commit命令后，提取log 寻找关键词 触发推送  具体流程 配置远程仓库  origin   使用ssh免输入方式进行推送 编写hook脚本post-commit  1234567891011121314151617181920212223############################# 特定词触发push gh-pages# Author: #############">
     
     
         
@@ -77,6 +77,8 @@
     <span id="actions">
       <ul>
         
+        <li><a class="icon" href="/2019/10/10/Linux-learning/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
         
         <li><a class="icon" href="/2019/10/06/defind-your-404/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
         
@@ -105,7 +107,7 @@
 
     </div>
     <div id="toc">
-      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#思路"><span class="toc-number">1.</span> <span class="toc-text">思路</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#参考"><span class="toc-number">2.</span> <span class="toc-text">参考</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#思路"><span class="toc-number">1.</span> <span class="toc-text">思路</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#具体流程"><span class="toc-number">2.</span> <span class="toc-text">具体流程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#参考"><span class="toc-number">3.</span> <span class="toc-text">参考</span></a></li></ol>
     </div>
   </span>
 </div>
@@ -159,7 +161,14 @@
 <li>寻找关键词</li>
 <li>触发推送</li>
 </ol>
-<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><p><a href="https://www.git-scm.com/book/zh/v2/Git-基础-查看提交历史" target="_blank" rel="noopener">Git - 查看提交历史</a><br><a href="https://www.runoob.com/linux/linux-shell-variable.html" target="_blank" rel="noopener">Shell 字符串</a>  </p>
+<h3 id="具体流程"><a href="#具体流程" class="headerlink" title="具体流程"></a>具体流程</h3><ol>
+<li>配置远程仓库  origin  </li>
+<li>使用ssh免输入方式进行推送</li>
+<li>编写hook脚本post-commit  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">############################</span></span><br><span class="line"><span class="comment"># 特定词触发push gh-pages</span></span><br><span class="line"><span class="comment"># Author: </span></span><br><span class="line"><span class="comment">############################</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 触发词</span></span><br><span class="line">tword=<span class="string">"触发词"</span> <span class="comment"># </span></span><br><span class="line"></span><br><span class="line"><span class="built_in">echo</span> <span class="string">"触发post-commit钩子"</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 截取触发词</span></span><br><span class="line">lmsg=$(git <span class="built_in">log</span> -1 --pretty=format:<span class="string">"%h - %an, %ar : %s"</span>)</span><br><span class="line">kword=<span class="variable">$&#123;lmsg:0-5&#125;</span></span><br><span class="line"><span class="comment"># 判断是否push</span></span><br><span class="line"><span class="keyword">if</span> <span class="built_in">test</span> <span class="variable">$kword</span> = <span class="variable">$tword</span></span><br><span class="line"><span class="keyword">then</span></span><br><span class="line">    <span class="built_in">echo</span> <span class="string">"满足条件，开始推送到gh-pages"</span></span><br><span class="line">    $(git push origin master:hexo-g)</span><br><span class="line">    <span class="built_in">echo</span> <span class="string">"完成push工作"</span></span><br><span class="line">    <span class="built_in">exit</span> 0</span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">    <span class="built_in">echo</span> <span class="string">"只是commit，没有触发推送"</span></span><br><span class="line"><span class="keyword">fi</span></span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><p><a href="https://www.git-scm.com/book/zh/v2/Git-基础-查看提交历史" target="_blank" rel="noopener">Git - 查看提交历史</a><br><a href="https://www.runoob.com/linux/linux-shell-variable.html" target="_blank" rel="noopener">Shell 字符串</a><br><a href="https://blog.csdn.net/lonyw/article/details/75392410" target="_blank" rel="noopener">github本地git push ssh方式免用户名和密码配置相关问题</a>   </p>
 
   </div>
 </article>
@@ -225,7 +234,7 @@
     </div>
 
     <div id="toc-footer" style="display: none">
-      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#思路"><span class="toc-number">1.</span> <span class="toc-text">思路</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#参考"><span class="toc-number">2.</span> <span class="toc-text">参考</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#思路"><span class="toc-number">1.</span> <span class="toc-text">思路</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#具体流程"><span class="toc-number">2.</span> <span class="toc-text">具体流程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#参考"><span class="toc-number">3.</span> <span class="toc-text">参考</span></a></li></ol>
     </div>
 
     <div id="share-footer" style="display: none">
